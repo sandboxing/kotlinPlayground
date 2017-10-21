@@ -32,5 +32,5 @@ fun printAllPairs(n: Int) {
 }
 
 fun main(args: Array<String>) {
-    printAllPairs(5)
+    printAllPairs(3)
 }

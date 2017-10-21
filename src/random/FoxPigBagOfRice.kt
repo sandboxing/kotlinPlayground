@@ -21,14 +21,14 @@ data class Move(
         val party: Party?
 )
 
-fun List<Party>.isFull() = this.size == 3 && contains(Pig) && contains(Fox) && contains(Rice)
+fun Set<Party>.isFull() = this.size == 3 && contains(Pig) && contains(Fox) && contains(Rice)
 
 var moves: List<Move> = emptyList()
 
 data class State(
         val farmerLocation: Shore,
-        val partiesOnOrigin: List<Party>,
-        val partiesOnDestination: List<Party>
+        val partiesOnOrigin: Set<Party>,
+        val partiesOnDestination: Set<Party>
 )
 
 fun State.isComplete() =
@@ -75,14 +75,14 @@ fun State.applyMove(move: Move): State {
 }
 
 
-val moveHistory = mutableListOf<State>()
+val stateHistory = mutableListOf<State>()
 val correctMoves = Stack<Move>()
 
 fun willFindWay(state: State): Boolean {
-    if (moveHistory.contains(state)) {
+    if (stateHistory.contains(state)) {
         return false
     } else {
-        moveHistory.add(state)
+        stateHistory.add(state)
     }
     if (!state.isValid()) {
         return false
@@ -135,7 +135,7 @@ fun willFindWay(state: State): Boolean {
 fun main(args: Array<String>) {
     willFindWay(
             State(farmerLocation = Shore.ORIGIN,
-                    partiesOnOrigin = listOf(Fox, Pig, Rice),
-                    partiesOnDestination = emptyList()))
-    println(correctMoves)
+                    partiesOnOrigin = setOf(Fox, Pig, Rice),
+                    partiesOnDestination = emptySet()))
+    correctMoves.forEach { println(it) }
 }
