@@ -1,8 +1,5 @@
 package random
 
-import java.io.*
-import java.util.*
-
 /**
  * https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks
  */
@@ -31,14 +28,14 @@ class Queue(var head: Node? = null) {
     }
 
     fun peek(): Node {
-        head.let {h ->
+        head.let { h ->
             if (h == null) throw RuntimeException("yo")
             return h
         }
     }
 }
 
-data class Node(val data: Int, var next: Node? = null)
+data class Node(@JvmField val data: Int, @JvmField var next: Node? = null)
 
 fun input(): Pair<Int, Int?> = readLine()!!.split(' ').let {
     if (it.size == 1) return Pair(it[0].toInt(), 0)
